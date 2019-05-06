@@ -1,8 +1,22 @@
 import React, {Component} from 'react'
 
 class Article extends Component {
-    state = {
-        isOpen: true
+    constructor(props){
+        super(props)
+
+        this.state = {
+            isOpen: this.defaultOpen
+        }
+    }
+
+    componentWillMount() {
+        console.log('---', 'mounting')
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.defaultOpen !== this.props.defaultOpen) this.setState({
+            isOpen: nextProps.defaultOpen
+        })    
     }
 
     render() {
@@ -30,7 +44,6 @@ class Article extends Component {
     }
 
     handleClick = () => {
-        console.log('---', 'clicked')
         this.setState({
             isOpen: !this.state.isOpen
         })
